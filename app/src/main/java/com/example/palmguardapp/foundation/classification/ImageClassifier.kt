@@ -1,0 +1,56 @@
+import android.content.Context
+import android.graphics.Bitmap
+import android.util.Log
+import com.example.palmguardapp.ml.Model
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.image.ImageProcessor
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+
+
+class ImageClassifier(private val context: Context) {
+
+    private val imageSize = 224
+    private val classes = arrayOf("Brown Spots", "Healthy")
+
+    private val imageProcessor = ImageProcessor.Builder()
+        .add(ResizeOp(imageSize, imageSize, ResizeOp.ResizeMethod.BILINEAR))
+        .build()
+
+    fun classifyImage(image: Bitmap): Pair<String, Float>? {
+        val model = Model.newInstance(context)
+
+        val tensorImage = TensorImage(DataType.FLOAT32)
+        tensorImage.load(image)
+        val processedImage = imageProcessor.process(tensorImage)
+
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, imageSize, imageSize, 3), DataType.FLOAT32)
+        inputFeature0.loadBuffer(processedImage.buffer)
+
+        val outputs = model.process(inputFeature0)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+        val confidences = outputFeature0.floatArray
+        for (i in confidences.indices) {
+            Log.d("ImageClassifier", "Class $i (${classes[i]}): ${confidences[i]}")
+        }
+
+        val maxPos = confidences.indices.maxByOrNull { confidences[it] } ?: -1
+        val maxConfidence = confidences[maxPos]
+
+        model.close()
+
+        return if (maxPos >= 0 && maxConfidence > THRESHOLD_CONFIDENCE) {
+            Pair(classes[maxPos], maxConfidence)
+        } else {
+            null
+        }
+    }
+
+    companion object {
+        private const val THRESHOLD_CONFIDENCE = 0.5f
+    }
+}
+
+

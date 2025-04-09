@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grayBackground">#EEEEEE</color>
+    <color name="grayBackgroundCard">#F1F2F2</color>
+    <color name="grayFont">#AEAEAE</color>
+    <color name="greenGeneral">#d2eac1</color>
+    <color name="primaryGreen">#d2eac1</color>
+</resources>

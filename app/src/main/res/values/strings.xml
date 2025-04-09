@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PalmGuard</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ig_teaguard">@teaguardteam</string>
+
+</resources>
