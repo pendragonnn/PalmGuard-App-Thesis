@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,4 +13,4 @@
         android:layout_height="wrap_content"
         android:text="Penyakit Algal Leaf disebabkan oleh alga hijau Cephaleuros virescens yang menyerang daun teh, menyebabkan bintik-bintik hijau kusam atau oranye pada daun." />
 
-</FrameLayout>
+</ScrollView>

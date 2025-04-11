@@ -32,11 +32,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="185dp"
                 android:layout_gravity="center"
+                android:scaleType="centerCrop"
                 android:layout_marginHorizontal="@dimen/margin_screen"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/dgs_wereng_img"/>
+                android:src="@drawable/palm_brown_spots_example_img"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/dd_cont_title"

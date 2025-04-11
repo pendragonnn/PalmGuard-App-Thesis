@@ -334,7 +334,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:visibility="gone"
             app:cardCornerRadius="0dp"
             app:strokeColor="@color/greenGeneral"
             app:strokeWidth="1dp"
@@ -366,7 +365,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/hs_wereng_img" />
+                        android:src="@drawable/palm_brown_spots_example_img" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView

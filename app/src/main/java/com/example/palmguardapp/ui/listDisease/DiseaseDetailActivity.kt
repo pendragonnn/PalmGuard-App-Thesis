@@ -58,11 +58,11 @@ class DiseaseDetailActivity : AppCompatActivity() {
     private fun setUpUi(diseaseDetail: DiseaseDiagnose?) {
         if(diseaseDetail?.diseaseName == "Brown Spots") {
             Glide.with(this)
-                .load(R.drawable.dgs_wereng_img)
+                .load(R.drawable.palm_brown_spots_example_img)
                 .into(binding.imageDisease)
         } else {
             Glide.with(this)
-                .load(R.drawable.upn_logo)
+                .load(R.drawable.palm_healthy_example_img)
                 .into(binding.imageDisease)
         }
 

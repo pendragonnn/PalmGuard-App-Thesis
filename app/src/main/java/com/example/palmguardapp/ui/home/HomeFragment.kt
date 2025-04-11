@@ -302,7 +302,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.titleResultDiagnosis.text = historyDiagnose.name
         val date = historyDiagnose.date.replace("-", " ")
         binding.dateResultDiagnosis.text = date
+        binding.confidenceResultDiagnosis.text = "Confidence: ${confidenceConverter(historyDiagnose.confidence)}"
         binding.cdHomeScreenAnalyze.visibility = View.VISIBLE
+    }
+
+    fun confidenceConverter(confidence: String): String {
+        val confidenceValue = confidence.toDouble() * 100
+        return if (confidenceValue % 1 == 0.0) {
+            confidenceValue.toInt().toString() + "%"
+        } else {
+            String.format("%.1f", confidenceValue) + "%"
+        }
     }
 
     override fun onDestroyView() {

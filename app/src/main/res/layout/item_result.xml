@@ -32,7 +32,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/hs_wereng_img" />
+                android:src="@drawable/palm_brown_spots_example_img" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/date_result_diagnosis"
-            android:text="Algal Leaf"
+            android:text="Brown Spots"
             android:textColor="@color/greenGeneral"
             android:textSize="20sp"
             android:textStyle="bold"
