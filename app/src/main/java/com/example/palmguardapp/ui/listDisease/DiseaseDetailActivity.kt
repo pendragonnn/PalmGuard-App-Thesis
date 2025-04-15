@@ -27,12 +27,6 @@ class DiseaseDetailActivity : AppCompatActivity() {
     private val diseaseToId = mapOf(
         "Brown Spots" to "D-001",
         "Healthy" to "D-002",
-        "Brown Spots" to "D-003",
-        "Healthy" to "D-004",
-        "Brown Spots" to "D-005",
-        "Healthy" to "D-006",
-        "Brown Spots" to "D-007",
-        "Healthy" to "D-008"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

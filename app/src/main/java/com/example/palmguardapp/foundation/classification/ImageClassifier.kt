@@ -3,54 +3,54 @@ import android.graphics.Bitmap
 import android.util.Log
 import com.example.palmguardapp.ml.Model
 import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
-
 class ImageClassifier(private val context: Context) {
 
     private val imageSize = 224
-    private val classes = arrayOf("Brown Spots", "Healthy")
-
     private val imageProcessor = ImageProcessor.Builder()
         .add(ResizeOp(imageSize, imageSize, ResizeOp.ResizeMethod.BILINEAR))
+        .add(NormalizeOp(0f, 255f))
         .build()
 
     fun classifyImage(image: Bitmap): Pair<String, Float>? {
         val model = Model.newInstance(context)
 
         val tensorImage = TensorImage(DataType.FLOAT32)
-        tensorImage.load(image)
+        val convertedBitmap = image.copy(Bitmap.Config.ARGB_8888, true)
+        tensorImage.load(convertedBitmap)
         val processedImage = imageProcessor.process(tensorImage)
 
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, imageSize, imageSize, 3), DataType.FLOAT32)
+        val inputFeature0 = TensorBuffer.createFixedSize(
+            intArrayOf(1, imageSize, imageSize, 3),
+            DataType.FLOAT32
+        )
         inputFeature0.loadBuffer(processedImage.buffer)
 
         val outputs = model.process(inputFeature0)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+        val yPred = outputFeature0.floatArray[0]
 
-        val confidences = outputFeature0.floatArray
-        for (i in confidences.indices) {
-            Log.d("ImageClassifier", "Class $i (${classes[i]}): ${confidences[i]}")
+        val confidence = (maxOf(yPred, 1 - yPred) * 100).toFloat()
+        val label = when {
+            yPred < 0.5f -> "Brown Spots"
+            yPred > 0.5f -> "Healthy"
+            else -> "Uncertain Input"
         }
 
-        val maxPos = confidences.indices.maxByOrNull { confidences[it] } ?: -1
-        val maxConfidence = confidences[maxPos]
+        Log.d("ImageClassifier", "y_pred: $yPred")
+        Log.d("ImageClassifier", "Label: $label, Confidence: ${String.format("%.1f", confidence)}%")
 
         model.close()
 
-        return if (maxPos >= 0 && maxConfidence > THRESHOLD_CONFIDENCE) {
-            Pair(classes[maxPos], maxConfidence)
-        } else {
+        return if (label == "Uncertain Input") {
             null
+        } else {
+            Pair(label, confidence)
         }
     }
-
-    companion object {
-        private const val THRESHOLD_CONFIDENCE = 0.5f
-    }
 }
-
-

@@ -45,17 +45,9 @@ class HistoryDiagnoseAdapter : ListAdapter<HistoryDiagnose, HistoryDiagnoseAdapt
                 titleResultDiagnosis.text = historyDiagnose.name
                 val date = historyDiagnose.date.replace("-", " ")
                 dateResultDiagnosis.text = date
-                binding.confidenceResultDiagnosis.text = "Confidence: ${confidenceConverter(historyDiagnose.confidence)}"
+                val confidenceFloat = historyDiagnose.confidence.toFloatOrNull() ?: 0f
+                binding.confidenceResultDiagnosis.text = "Confidence: %.1f%%".format(confidenceFloat)
             }
-        }
-    }
-
-    fun confidenceConverter(confidence: String): String {
-        val confidenceValue = confidence.toDouble() * 100
-        return if (confidenceValue % 1 == 0.0) {
-            confidenceValue.toInt().toString() + "%"
-        } else {
-            String.format("%.1f", confidenceValue) + "%"
         }
     }
 

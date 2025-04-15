@@ -39,7 +39,8 @@ class DiagnoseDetailActivity : AppCompatActivity() {
 
         binding.tvTitle.text = historyDiagnose.name
         binding.ivImgTea.setImageURI(Uri.parse(historyDiagnose.imageUri))
-        binding.tvConfidence.text = confidenceConverter(historyDiagnose.confidence)
+        val confidenceFloat = historyDiagnose.confidence.toFloatOrNull() ?: 0f
+        binding.tvConfidence.text = "Confidence: %.1f%%".format(confidenceFloat)
         binding.viewPager.adapter = VPAdapter(this, historyDiagnose)
         binding.btnHsGallery.setOnClickListener {
             val bundle = Bundle().apply {
@@ -69,12 +70,4 @@ class DiagnoseDetailActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    fun confidenceConverter(confidence: String): String {
-        val confidenceValue = confidence.toDouble() * 100
-        return if (confidenceValue % 1 == 0.0) {
-            confidenceValue.toInt().toString() + "%"
-        } else {
-            String.format("%.1f", confidenceValue) + "%"
-        }
-    }
 }

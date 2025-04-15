@@ -27,6 +27,7 @@ import com.example.palmguardapp.databinding.FragmentHomeBinding
 import com.example.palmguardapp.foundation.utils.saveImageToLocalStorage
 import com.example.palmguardapp.ui.ViewModelFactory
 import com.example.palmguardapp.ui.diagnose.DiagnoseDetailActivity
+import com.example.palmguardapp.ui.errorDetection.ErrorDetectionActivity
 import com.example.palmguardapp.ui.listDisease.DiseaseDetailActivity
 import com.google.android.material.snackbar.Snackbar
 import com.yalantis.ucrop.UCrop
@@ -46,14 +47,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         ViewModelFactory.getInstance(requireContext())
     }
     private val diseaseToId = mapOf(
-        "Algal Leaf" to "D-001",
-        "Anthracnose" to "D-002",
-        "Bird Eye Spot" to "D-003",
-        "Brown Blight" to "D-004",
-        "Gray Light" to "D-005",
-        "Red Leaf Spot" to "D-006",
-        "White Spot" to "D-007",
-        "Healthy" to "D-008"
+        "Brown Spots" to "D-001",
+        "Healthy" to "D-002",
+//        "Bird Eye Spot" to "D-003",
+//        "Brown Blight" to "D-004",
+//        "Gray Light" to "D-005",
+//        "Red Leaf Spot" to "D-006",
+//        "White Spot" to "D-007",
+//        "Healthy" to "D-008"
     )
 
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
@@ -89,6 +90,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     startCrop(it)
                 }
             } else {
+                val selectedImageUri = result.data?.data
+                Log.d("galleryLauncher", "Selected URI: $selectedImageUri")
+                Log.d("galleryLauncher", "ini kenapa woy")
                 showSnackbarError("Permission denied or image selection failed")
             }
         }
@@ -191,14 +195,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val classifier = ImageClassifier(requireContext())
         val result = classifier.classifyImage(image)
 
-        if(result != null) {
+        if (result != null) {
             val (diagnosis, confidence) = result
             Log.d("HomeFragment", "Diagnosis: $result")
             saveImageAndFetchData(diagnosis, confidence, image)
         } else {
             showSnackbarError("Gambar tidak sesuai, silahkan foto ulang")
+
+            val intent = Intent(requireContext(), ErrorDetectionActivity::class.java)
+            startActivity(intent)
         }
     }
+
 
     private fun showSnackbarError(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
@@ -208,6 +216,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val imageUri = saveImageToLocalStorage(requireContext(), image)
         val formatter = SimpleDateFormat("dd-MMMM-yyyy", Locale("id", "ID"))
         val date = Date()
+        Log.d("saveImageAndFetchData", "Date: $date")
         val dateNow = formatter.format(date)
         val diseaseId = diseaseToId[diagnosis]
 //        diseaseId?.let { id ->
@@ -302,18 +311,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.titleResultDiagnosis.text = historyDiagnose.name
         val date = historyDiagnose.date.replace("-", " ")
         binding.dateResultDiagnosis.text = date
-        binding.confidenceResultDiagnosis.text = "Confidence: ${confidenceConverter(historyDiagnose.confidence)}"
+        val confidenceFloat = historyDiagnose.confidence.toFloatOrNull() ?: 0f
+        binding.confidenceResultDiagnosis.text = "Confidence: %.1f%%".format(confidenceFloat)
         binding.cdHomeScreenAnalyze.visibility = View.VISIBLE
     }
 
-    fun confidenceConverter(confidence: String): String {
-        val confidenceValue = confidence.toDouble() * 100
-        return if (confidenceValue % 1 == 0.0) {
-            confidenceValue.toInt().toString() + "%"
-        } else {
-            String.format("%.1f", confidenceValue) + "%"
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
