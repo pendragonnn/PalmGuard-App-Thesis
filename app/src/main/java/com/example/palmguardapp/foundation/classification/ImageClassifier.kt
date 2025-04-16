@@ -9,9 +9,12 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
+
 class ImageClassifier(private val context: Context) {
 
     private val imageSize = 224
+    private val classes = arrayOf("Brown Spots", "Healthy", "Unknown")
+
     private val imageProcessor = ImageProcessor.Builder()
         .add(ResizeOp(imageSize, imageSize, ResizeOp.ResizeMethod.BILINEAR))
         .add(NormalizeOp(0f, 255f))
@@ -25,32 +28,32 @@ class ImageClassifier(private val context: Context) {
         tensorImage.load(convertedBitmap)
         val processedImage = imageProcessor.process(tensorImage)
 
-        val inputFeature0 = TensorBuffer.createFixedSize(
-            intArrayOf(1, imageSize, imageSize, 3),
-            DataType.FLOAT32
-        )
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, imageSize, imageSize, 3), DataType.FLOAT32)
         inputFeature0.loadBuffer(processedImage.buffer)
 
         val outputs = model.process(inputFeature0)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-        val yPred = outputFeature0.floatArray[0]
 
-        val confidence = (maxOf(yPred, 1 - yPred) * 100).toFloat()
-        val label = when {
-            yPred < 0.5f -> "Brown Spots"
-            yPred > 0.5f -> "Healthy"
-            else -> "Uncertain Input"
+        val confidences = outputFeature0.floatArray
+        Log.d("ImageClassifier", "Confidence: ${confidences.size}")
+        for (i in confidences.indices) {
+            Log.d("ImageClassifier", "Class $i (${classes[i]}): ${confidences[i]}")
         }
 
-        Log.d("ImageClassifier", "y_pred: $yPred")
-        Log.d("ImageClassifier", "Label: $label, Confidence: ${String.format("%.1f", confidence)}%")
+        val maxPos = confidences.indices.maxByOrNull { confidences[it] } ?: -1
+        val maxConfidence =  (maxOf(confidences[maxPos]) * 100).toFloat()
+        Log.d("ImageClassifier", "Max Position: $maxPos, Max Confidence: $maxConfidence")
 
         model.close()
 
-        return if (label == "Uncertain Input") {
-            null
+        return if (maxPos >= 0 && maxConfidence > THRESHOLD_CONFIDENCE && classes[maxPos] != "Unknown") {
+            Pair(classes[maxPos], maxConfidence)
         } else {
-            Pair(label, confidence)
+            null
         }
+    }
+
+    companion object {
+        private const val THRESHOLD_CONFIDENCE = 0.5f
     }
 }
