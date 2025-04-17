@@ -1,5 +1,6 @@
 package com.example.palmguardapp.ui.detection
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -51,6 +52,20 @@ class DetectionFragment : Fragment(R.layout.fragment_detection) {
             override fun onItemClicked(data: HistoryDiagnose) {
                 navigateToDiagnoseDetail(data)
             }
+
+            fun onDeleteClicked(data: HistoryDiagnose) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Hapus Riwayat")
+                    .setMessage("Apakah kamu yakin ingin menghapus riwayat ini?")
+                    .setPositiveButton("Hapus") { _, _ ->
+                        lifecycleScope.launch {
+                            viewModel.deleteHistory(data)
+                        }
+                    }
+                    .setNegativeButton("Batal", null)
+                    .show()
+            }
+
         })
     }
 

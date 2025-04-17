@@ -47,15 +47,19 @@ class HistoryDiagnoseAdapter : ListAdapter<HistoryDiagnose, HistoryDiagnoseAdapt
                 dateResultDiagnosis.text = date
                 val confidenceFloat = historyDiagnose.confidence.toFloatOrNull() ?: 0f
                 binding.confidenceResultDiagnosis.text = "Confidence: %.1f%%".format(confidenceFloat)
+                delete.setOnClickListener {
+                    onItemClickCallback.onDeleteClicked(historyDiagnose)
+                }
             }
         }
     }
 
     interface OnItemClickCallback {
         fun onItemClicked(data: HistoryDiagnose)
+        fun onDeleteClicked(data: HistoryDiagnose)
     }
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
+    fun setOnItemClickCallback(callback: OnItemClickCallback) {
+        this.onItemClickCallback = callback
     }
 }
