@@ -314,6 +314,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val confidenceFloat = historyDiagnose.confidence.toFloatOrNull() ?: 0f
         binding.confidenceResultDiagnosis.text = "Confidence: %.1f%%".format(confidenceFloat)
         binding.cdHomeScreenAnalyze.visibility = View.VISIBLE
+        binding.tvHsHistoryEmpty.visibility = View.GONE
     }
 
 

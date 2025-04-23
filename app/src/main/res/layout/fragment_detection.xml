@@ -48,6 +48,15 @@
             android:paddingTop="@dimen/margin_component"
             app:layout_constraintTop_toBottomOf="@id/dd_cont_title">
 
+            <TextView
+                android:id="@+id/textViewEmptyHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Belum Ada Riwayat"
+                android:textColor="@color/grayFont"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_result_detection"
                 android:layout_width="match_parent"

@@ -53,7 +53,7 @@ class DetectionFragment : Fragment(R.layout.fragment_detection) {
                 navigateToDiagnoseDetail(data)
             }
 
-            fun onDeleteClicked(data: HistoryDiagnose) {
+            override fun onDeleteClicked(data: HistoryDiagnose) {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Hapus Riwayat")
                     .setMessage("Apakah kamu yakin ingin menghapus riwayat ini?")
@@ -80,6 +80,15 @@ class DetectionFragment : Fragment(R.layout.fragment_detection) {
             viewModel.detectionList.collect { historyDiagnoses ->
                 Log.d("DetectionFragment", "Observing detection list. Count: ${historyDiagnoses.size}")
                 detectionAdapter.submitList(historyDiagnoses)
+
+                if (historyDiagnoses.isEmpty()) {
+                    binding.textViewEmptyHistory.visibility = View.VISIBLE
+                    binding.rvResultDetection.visibility = View.GONE
+                } else {
+                    binding.textViewEmptyHistory.visibility = View.GONE
+                    binding.rvResultDetection.visibility = View.VISIBLE
+                    detectionAdapter.submitList(historyDiagnoses)
+                }
             }
         }
     }
