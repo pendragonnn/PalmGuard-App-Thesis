@@ -52,185 +52,172 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!--    Jangan lupa tambahin constraint        -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_tutorial"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="@dimen/margin_component"
-            android:backgroundTint="@color/white"
-            app:cardCornerRadius="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_tutor_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cv_headline_top"
-            app:strokeColor="@color/greenGeneral">
+            app:layout_constraintTop_toBottomOf="@id/cv_headline_top">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/margin_component">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_tutorial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_component"
+                android:backgroundTint="@color/white"
+                android:layout_marginEnd="@dimen/margin_component"
+                app:cardCornerRadius="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.45"
+                app:strokeColor="@color/greenGeneral">
 
-                <ImageView
-                    android:id="@+id/iv_hs_phone_take_pic"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/hs_phone_take_pic_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_component">
 
-                <TextView
-                    android:id="@+id/tv_hs_phone_take_pic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Ambil Gambar"
-                    android:textColor="@color/greenGeneral"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_hs_phone_take_pic" />
+                    <ImageView
+                        android:id="@+id/iv_hs_phone_take_pic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/hs_phone_take_pic_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_hs_down_arrow"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="5dp"
-                    android:rotation="270"
-                    android:src="@drawable/back_button"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_hs_phone_take_pic" />
+                    <TextView
+                        android:id="@+id/tv_hs_phone_take_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Ambil Gambar"
+                        android:textColor="@color/greenGeneral"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_hs_phone_take_pic" />
 
-                <ImageView
-                    android:id="@+id/iv_hs_phone_analyze"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/hs_phone_analyze_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_hs_down_arrow" />
+                    <ImageView
+                        android:id="@+id/iv_hs_down_arrow"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="5dp"
+                        android:rotation="270"
+                        android:src="@drawable/back_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_hs_phone_take_pic" />
 
-                <TextView
-                    android:id="@+id/tv_hs_phone_analyze"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ambil Gambar"
-                    android:textColor="@color/greenGeneral"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_hs_phone_analyze" />
+                    <ImageView
+                        android:id="@+id/iv_hs_phone_analyze"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/hs_phone_analyze_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_hs_down_arrow" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/tv_hs_phone_analyze"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ambil Gambar"
+                        android:textColor="@color/greenGeneral"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_hs_phone_analyze" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btn_hs_camera"
-            android:layout_width="150dp"
-            android:layout_height="90dp"
-            android:backgroundTint="@color/white"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cv_tutorial"
-            app:strokeColor="@color/greenGeneral">
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/margin_component">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_hs_camera"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cv_tutorial"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintHeight_percent="0.43"
+                app:strokeColor="@color/greenGeneral">
 
-                <ImageView
-                    android:id="@+id/tv_camera_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="center"
-                    android:src="@drawable/hs_camera_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_component">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gunakan Kamera"
-                    android:textColor="@color/greenGeneral"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_camera_img" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/tv_camera_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="center"
+                        android:src="@drawable/hs_camera_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btn_hs_gallery"
-            android:layout_width="150dp"
-            android:layout_height="90dp"
-            android:backgroundTint="@color/greenGeneral"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/cv_tutorial"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:strokeColor="@color/greenGeneral">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gunakan Kamera"
+                        android:textColor="@color/greenGeneral"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_camera_img" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/margin_component">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_hs_gallery"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:backgroundTint="@color/greenGeneral"
+                app:cardCornerRadius="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_tutorial"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.43"
+                app:layout_constraintWidth_percent="0.5"
+                app:strokeColor="@color/greenGeneral">
 
-                <ImageView
-                    android:id="@+id/tv_gallery_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="center"
-                    android:src="@drawable/hs_gallery_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_component">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ambil Dari Galeri"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_gallery_img" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/tv_gallery_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="center"
+                        android:src="@drawable/hs_gallery_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ambil Dari Galeri"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_gallery_img" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <!--        <Button-->
-        <!--            android:id="@+id/btn_hs_camera"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            android:layout_marginTop="20dp"-->
-        <!--            android:backgroundTint="@color/primaryGreen"-->
-        <!--            android:text="Gunakan Kamera"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:textSize="16sp"-->
-        <!--            android:textStyle="bold"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/cv_headline" />-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/btn_hs_gallery"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:backgroundTint="@color/primaryGreen"-->
-        <!--            android:text="Ambil dari Galeri"-->
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textSize="16sp"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/bt_use_camera" />-->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_hs_detail_explanation_title"
@@ -241,7 +228,7 @@
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_tutorial"
+            app:layout_constraintTop_toBottomOf="@+id/cl_tutor_button"
             app:strokeColor="@color/greenGeneral">
 
             <TextView
