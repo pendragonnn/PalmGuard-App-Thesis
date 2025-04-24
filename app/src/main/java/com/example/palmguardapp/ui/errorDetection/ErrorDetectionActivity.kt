@@ -1,5 +1,6 @@
 package com.example.palmguardapp.ui.errorDetection
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.palmguardapp.R
 import com.example.palmguardapp.databinding.ActivityErrorDetectionBinding
+import com.example.palmguardapp.ui.MainActivity
 
 class ErrorDetectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityErrorDetectionBinding
@@ -24,6 +26,10 @@ class ErrorDetectionActivity : AppCompatActivity() {
 
         binding.btErrorBack.setOnClickListener {
             finish()
+        }
+
+        binding.esBtnRedo.setOnClickListener {
+            startActivity(Intent(this@ErrorDetectionActivity, MainActivity::class.java))
         }
     }
 }

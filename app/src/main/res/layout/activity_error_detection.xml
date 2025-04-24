@@ -62,8 +62,8 @@
         android:layout_marginTop="@dimen/margin_component"
         android:layout_marginHorizontal="@dimen/margin_screen"
         android:justificationMode="inter_word"
-        android:text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit eos illo cupiditate, placeat odit dicta similique expedita enim in suscipit, tenetur hic aliquam ad fugiat quaerat."
         android:textColor="@color/black"
+        android:text="Gambar yang anda gunakan tidak dapat diproses, silahkan ulangi proses deteksi dan memilih gambar yang lebih baik. sesuaikan gambar/kamera dengan daun agar terlihat lebih jelas."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -78,7 +78,7 @@
         android:layout_marginHorizontal="@dimen/margin_screen"
         android:layout_marginBottom="@dimen/margin_screen"
         android:paddingVertical="14dp"
-        android:text="Ambil Gambar Ulang"
+        android:text="Kembali Ke Menu Utama"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
